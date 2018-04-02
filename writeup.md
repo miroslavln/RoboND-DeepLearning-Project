@@ -1,4 +1,4 @@
-###Model Description
+### Model Description ###
 In the encoder the network is using a Separable Convolution layer with 2x2 strides followed by a batch normalization layer. 
 The 2x2 strides result in decreasing the first 2 dimensions in half.
 
@@ -23,7 +23,7 @@ resulting in (160x160x32) output.
 8. Conv2D layer that converts the output to the desired num classes resulting in (160x160x3) output
 
 
-##Model Summary
+## Model Summary ##
 ```
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
@@ -97,7 +97,7 @@ Final Score: 0.42842869109233533
 
 
 
-##Choice of Parameters
+## Choice of Parameters
 My initial model was only with 2 Encoder and Decoder layers and with a learning rate of 0.1. This quickly turned out to be producing bad results
 Next I increased the number of layers and used 6,12,32 for the number of filters. I also reduced the learning rate to 0.001 and trained using a GPU.
 This produced better results but my final score was around 0.3. I then increased the number of filters in each layer. 
@@ -111,30 +111,30 @@ steps_per_epoch = 350
 validation_steps = 50
 ```
 
-##Separable convolution vs Regular convolution
+## Separable convolution vs Regular convolution
 The separable convolution is very similar to the regular convolution layer but its big advantage is that the number of parameters 
 is greatly reduced. It is implemented by a convolution performed over each channel followed by 1x1 convolution which combines 
 the outputs from the previous convolution layer. 
 
 The resulting reduction in parameters is greatly beneficial for performance and very useful for mobile devices.
 
-##1x1 Convolution
+## 1x1 Convolution
 The 1x1 Convolution is very similar to the fully connected network but with the benefit of preserving spatial information and dimensionality.
 It is used in the network to connect the encoder and decoder and to convert the final output to the desired number of classes.
 
 The fully connected layer is usually used for tasks that don't require the output to be an image. It is better for object 
 classification and recognition. 
 
-##Benefits and drawbacks
+## Benefits and drawbacks
 The Fully convolutional network has the benefit of describing and categorizing each pixel in the image providing for a much greater detail. 
 This can be also a drawback when we are trying to detect larger objects and entities and their positions. In cases where we want to detect a 
 generic object and its position in the scene the YOLO network would be better to use. 
 
-##Performance on different data
+## Performance on different data
 The network is performing well for human subjects but will need further tweaking for more categories(cats,dogs, cars) we will probably need much more training data
 and much more complicated network as the number of classifications increase.  
 
-##Conclusion
+## Conclusion
 This is the second time that I am doing a fully convolutional neural network. My previous attempt was while going to the 
 SDCND. The network architecture has changes since then by using the separable convolution, this simplifies the design and implementation
 without impacting the performance. 

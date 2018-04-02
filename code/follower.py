@@ -192,7 +192,7 @@ def sensor_frame(sid, data):
 
 def sio_server():
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
+    eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 4567)), app)
 
 
 if __name__ == '__main__':
